@@ -1,3 +1,97 @@
+
+// Add hover effect to skill cards
+document.addEventListener('DOMContentLoaded', function() {
+    const carouselTrack = document.querySelector('.infinite-carousel-track');
+    
+    // Reset animation at the right moment for perfect loop
+    carouselTrack.addEventListener('animationiteration', function() {
+        if (this.style.animationPlayState !== 'paused') {
+            // Reset the animation
+            this.style.animation = 'none';
+            void this.offsetWidth; // Trigger reflow
+            this.style.animation = 'scroll 30s linear infinite';
+        }
+    });
+    
+    // Adjust speed based on screen size
+    function adjustCarouselSpeed() {
+        if (window.innerWidth < 768) {
+            carouselTrack.style.animationDuration = '40s';
+        } else if (window.innerWidth < 576) {
+            carouselTrack.style.animationDuration = '50s';
+        } else {
+            carouselTrack.style.animationDuration = '30s';
+        }
+    }
+    
+    window.addEventListener('resize', adjustCarouselSpeed);
+    adjustCarouselSpeed();
+    
+    // Smooth scroll for buttons
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+});
+
+
+// contact start
+
+
+
+// contact end 
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('#portfolio-filter li');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            filterButtons.forEach(btn => btn.classList.remove('filter-active'));
+            this.classList.add('filter-active');
+            
+            const filterValue = this.getAttribute('data-filter'); // e.g. '.react'
+
+            portfolioItems.forEach(item => {
+                if (filterValue === '*') {
+                    item.style.display = 'block';
+                } else {
+                    // Remove the dot before checking
+                    const classToCheck = filterValue.replace('.', '');
+                    if (item.classList.contains(classToCheck)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+
+                // Re-trigger animations
+                item.classList.remove('wow', 'fadeInUp');
+                void item.offsetWidth;
+                item.classList.add('wow', 'fadeInUp');
+            });
+
+            if (typeof WOW !== 'undefined') {
+                new WOW().init();
+            }
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
 (function ($) {
     "use strict";
     
@@ -106,4 +200,34 @@
     });
     
 })(jQuery);
+
+
+
+// portflio
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const filterButtons = document.querySelectorAll("#portfolio-filter li");
+    const portfolioItems = document.querySelectorAll(".portfolio-item");
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // Remove active class from all
+        filterButtons.forEach((b) => b.classList.remove("filter-active"));
+        // Add active to current
+        btn.classList.add("filter-active");
+
+        const filterValue = btn.getAttribute("data-filter");
+
+        portfolioItems.forEach((item) => {
+          if (filterValue === "*" || item.classList.contains(filterValue.slice(1))) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+    });
+  });
+
 
