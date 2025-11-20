@@ -1531,7 +1531,7 @@ a:focus {
 /********* Footer CSS **********/
 /*******************************/
 .footer {
-  background: linear-gradient(135deg, rgb(219, 51, 71), rgb(179, 20, 40));
+  background: #EF233C;
   color: #fff;
   padding: 60px 0 30px;
   text-align: center;
